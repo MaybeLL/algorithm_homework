@@ -3,4 +3,4 @@ project(algorithm_homework)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(algorithm_homework main.cpp)
+add_executable(algorithm_homework main.cpp Linkedlist.cpp)
