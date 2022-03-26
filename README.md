@@ -5,7 +5,7 @@
 
 # 关于分工
 * Dorothy011: 项目总架构师
-* ljr: 外包工 
+* MaybeLL: 外包工 
 * Sendoh24: 实现接口函数    
 * xuziyue1998: 负责结果函数
 * 
