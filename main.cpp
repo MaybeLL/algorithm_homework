@@ -15,7 +15,7 @@ int main() {
         buckets.push_back(new Linkedlist());
     }
     //检查一下
-    buckets[0]->show();
+    buckets[0]->show();     //第0位比特流对应的buckets
     buckets[1]->show();
 //    Linkedlist* l0 = new Linkedlist();
 //    Linkedlist* l1 = new Linkedlist();
@@ -26,8 +26,8 @@ int main() {
 //    Linkedlist* l6 = new Linkedlist();
 //    l0->show();
 //    l3->show();
-    array<int,22> mydata = {0,1, 0, 1, 1, 0,0,0,1,0,0,1,0,0,1,1,1,0,1,1,0,1};
-    int datasize = mydata.size();
+//    array<int,22> mydata = {0,1, 0, 1, 1, 0,0,0,1,0,0,1,0,0,1,1,1,0,1,1,0,1};
+//    int datasize = mydata.size();
 
 //    TODO 读数据文件到下面的数组
 //    vector<vector<int>> binaryflow(7,vector<int> (1000000));
