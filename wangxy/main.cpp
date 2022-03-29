@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     // 设置文件名
     const char *decimalfile = "integer_1000000.dat";
     const char *binaryfile[FILENUM];
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < FILENUM; i++) {
         string name = "Binary_1000000_" + to_string(i) + ".dat";
         binaryfile[i] = name.c_str();
     }
