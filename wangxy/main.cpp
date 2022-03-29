@@ -1,6 +1,6 @@
 /*
  * @author Wang Xingyu
- * @date 2022/3/29
+ * @date 2022/3/28
  */
 
 #include "data.h"
@@ -66,6 +66,10 @@ int main(int argc, char *argv[])
     }
 
     // 数据读取与具体实现
+    // 存储需要输出的时间戳、估计值、真实值
+    vector<int> time_array;
+    vector<int> esti_array;
+    vector<int> true_array;
     int true_value = 0;  // 真实值
     int time = 1;
     while (time <= STREAMLEN) {
@@ -92,7 +96,7 @@ int main(int argc, char *argv[])
         }
 
         true_value += decimaldata[time-1];  // 时刻更新真实值
-        // 超过窗口大小时。超出部分去掉
+        // 超过窗口大小时，超出部分去掉
         if (time - 1 >= WINDOWLEN) {
             true_value -= decimaldata[time-1-WINDOWLEN];
         }
@@ -114,28 +118,39 @@ int main(int argc, char *argv[])
                 num_1bit.push_back(tmp);
             }
 
-            int estimate = 0;  // 估计值
+            int esti_value = 0;  // 估计值
             for (int i = 0; i < FILENUM; i++) {
                 // double c_i = (double) num_1bit[i] / (double) curr_win;
                 double c_i = (double) num_1bit[i];
-                estimate += c_i * pow(2, i);
+                esti_value += c_i * pow(2, i);
             }
 
-            cout << "timestamp = " << time << endl;
-            cout << "\t" << "estimate: " << estimate << endl;
-            cout << "\t" << "truth: " << true_value << endl;
-
-            // 在要求时间戳时打印分桶情况
-            if (time == TIME1 || time == TIME2 || time == TIME3) {
-                cout << "Timestamp = " << time << endl;
-                for (int i = 0; i < FILENUM; i++) {
-                    buckets[i]->show();
-                }
-            }
+            time_array.push_back(time);
+            esti_array.push_back(esti_value);
+            true_array.push_back(true_value);
         }
+
+        // 在要求时间戳时打印分桶情况
+        if (time == TIME1 || time == TIME2 || time == TIME3) {
+            cout << "Timestamp = " << time << endl;
+            for (int i = 0; i < FILENUM; i++) {
+                buckets[i]->show();
+                cout << endl;
+            }
+            cout << "*****************************************" << endl;
+        }
+
+        // 读取处理下一个数据
         time++;
     }
     free(decimaldata);
+
+    // 输出时间戳、估计值、真实值
+    for (int i = 0; i < time_array.size()-1; i++) {
+        cout << "timestamp = " << time_array[i] << endl;
+        cout << "\t" << "estimate: " << esti_array[i] << endl;
+        cout << "\t" << "truth: " << true_array[i] << endl;
+    }
 
     // 关闭文件
     for (int i = 0; i < FILENUM; i++) {
