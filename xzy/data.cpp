@@ -7,17 +7,20 @@
 
 using namespace std;
 
+//定义整数转换二进制数的函数
 void Binary(int num, int arr[7]) {
 	int k;
 	for (int i = 0; i < 7; i++) {
 		k = num % 2;
-		arr[6 - i] = k;
+		arr[6 - i] = k;//用一个大小为7个元素的数组分别保存二进制七位数字
 		num /= 2;
 	}
 }
 
+//整体产生整数数据文件以及二进制数据文件的函数
 void GenerateData() {
-    ofstream out;
+	ofstream out;//整数文件
+	//7个二进制文件
 	ofstream out0;
 	ofstream out1;
 	ofstream out2;
@@ -25,9 +28,9 @@ void GenerateData() {
 	ofstream out4;
 	ofstream out5;
 	ofstream out6;
-	ifstream in;
-	int integer;
-	int binary[7];
+	ifstream in;//用于读取整数文件
+	int integer;//依次表示整数文件中的每一个数字
+	int binary[7];//用于表示每个整数转换为二进制形式表示的每一位数字
 
 	out.open("integer_1000000.dat", ios::app);
 	out0.open("Binary_1000000_0.dat", ios::app);
@@ -38,8 +41,9 @@ void GenerateData() {
 	out5.open("Binary_1000000_5.dat", ios::app);
 	out6.open("Binary_1000000_6.dat", ios::app);
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	mt19937 rand_num(seed);
+	mt19937 rand_num(seed);//采用mt19937产生快速高质量的随机数
 	uniform_int_distribution<long long> dist(0, 127);
+	//均匀产生范围为0-127的随机数并写入相应文件中
 	for (int i = 0; i < 1000000; i++) {
 		out << dist(rand_num) << "";
 		out << "\n";
@@ -49,8 +53,8 @@ void GenerateData() {
 	if (!in.is_open())
 		cout << "Open file failure" << endl;
 	for (int j = 0; j < 1000000; j++) {
-		in >> std::ws >> integer;
-		Binary(integer, binary);
+		in >> std::ws >> integer;//依次读取文件中的每一个整数传入integer
+		Binary(integer, binary);//将每一个整数转换为二进制数，并依次存入数组写入相应的文件中
 		out0 << binary[0] << "\n";
 		out1 << binary[1] << "\n";
 		out2 << binary[2] << "\n";
