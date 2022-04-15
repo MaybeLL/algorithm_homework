@@ -20,7 +20,7 @@ Linkedlist::Linkedlist() {
     this->head = nullptr;
     this->tail = nullptr;
 }
-
+//打印链表
 void Linkedlist::show() {
     Node* p = this->head;
     while(p!= nullptr){
@@ -48,18 +48,14 @@ void Linkedlist::head_insert(int times, int s) {
 }
 
 void Linkedlist::delete_tail() {
-    //链表空
-    if (this->len==0){
-        return;
-    }
-    //只有一个节点
-    if (this->len==1){
+    //链表空或只有一个节点
+    if (this->len==1||this->len==0){
         this->len = 0;
         this->head = nullptr;
         this->tail = nullptr;
         return;
     }
-    //
+    //找到尾节点的前一个节点
     Node* p = head;
     while(p->next!=tail){
         p = p->next;
@@ -69,8 +65,9 @@ void Linkedlist::delete_tail() {
     this->len--;
 }
 
+//从p指针处开始合并节点
 void Linkedlist::merge(Node *p) {
-    //指针是否合法
+    //判断是否有足够节点来进行合并
     if (p!= nullptr&&p->next!= nullptr){
         p->size = p->size + p->next->size;
         //删除p.next节点
@@ -87,7 +84,7 @@ void Linkedlist::merge(Node *p) {
         cout<<"合并位置为空，无法合并"<<endl;
     }
 }
-
+//计算1bit个数估计值
 int Linkedlist::eval() {
     if (this->len==0){
         return 0;

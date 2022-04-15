@@ -34,6 +34,7 @@ void Linkedlist::show() {
     }
 }
 
+// 头插法
 void Linkedlist::head_insert(int timestamp, int size) {
     if (this->len==0){
         Node* t = new Node(timestamp, size);
@@ -61,7 +62,7 @@ void Linkedlist::delete_tail() {
         this->tail = nullptr;
         return;
     }
-    //
+    //找尾节点的前一个节点
     Node* p = this->head;
     while(p->next!=this->tail){
         p = p->next;
@@ -72,7 +73,7 @@ void Linkedlist::delete_tail() {
     this->tail = p;
     this->len--;
 }
-
+//合并p节点和p->next节点
 void Linkedlist::merge(Node *p) {
     //指针是否合法
     if (p!= nullptr&&p->next!= nullptr){
@@ -92,7 +93,7 @@ void Linkedlist::merge(Node *p) {
         cout<<"合并位置为空，无法合并"<<endl;
     }
 }
-
+//计算1bit个数
 int Linkedlist::eval() {
     if (this->len==0){
         return 0;
