@@ -1,2 +1,6 @@
 # Project exclude paths
 /cmake-build-debug/
+ljr/src/non_uniform_vector1
+ljr/src/non_uniform_vector2
+ljr/src/uniform_vector1
+ljr/src/uniform_vector2
