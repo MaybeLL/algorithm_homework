@@ -19,8 +19,8 @@ void write(const char* fu1, const char* fu2, const char* fnu1, const char* fnu2)
     FILE* fpnu1 = fopen(fnu1, "wb");
     FILE* fpnu2 = fopen(fnu2, "wb");
 
-    for (int i = 0; i < 31250000; i++) {//由于总共生成1000000000个二进制数，但是C++读写只能按字节读写，所以将其表示为unsigned int一次写四个字节也就是32位，所以总共写31250000次
-        for (int j = 0; j < 32; j++) {
+    for (int i = 0; i < 31250000; i++) {//由于总共生成1000000000个二进制数，但是C++读写只能按字节读写，
+        for (int j = 0; j < 32; j++) {//所以将其表示为unsigned int一次写四个字节也就是32位，所以总共写31250000次
             run1 = dist(rand);
             run2 = dist(rand);
             rnun1 = distn(rand);
