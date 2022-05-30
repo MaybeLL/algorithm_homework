@@ -14,13 +14,14 @@
 #include <unordered_set>
 #include <unordered_map>
 
-// #define SINGLES_NUM 493       // singles数量
-// #define DOCS_NUM 1000         // 文档数量
-// #define SIGNATURES_NUM 30     // 签名数量
+#define SINGLES_NUM 493       // singles数量
+#define DOCS_NUM 1000         // 文档数量
+#define SIGNATURES_NUM 30     // 签名数量
 
-#define SINGLES_NUM 4       
-#define DOCS_NUM 3        
-#define SIGNATURES_NUM 4
+// 测试用
+// #define SINGLES_NUM 4       
+// #define DOCS_NUM 3        
+// #define SIGNATURES_NUM 4
 
 typedef unsigned long long ull;
 uint32_t p_value = 4930001;
