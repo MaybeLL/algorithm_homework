@@ -18,7 +18,6 @@ int get_uniform_32bit(){
         int temp = b(e);
         a = (a | temp<<i);
 
-        // cout<<temp<<endl;
     }
     return a;
 }
@@ -102,13 +101,11 @@ int hamming(int s1,int s2){
     int res = 0;
     int stream1 = s1;
     int stream2 = s2;
-    // cout<<(a^b)<<endl;
 
     //读状态: 与1与
     for(int i=0;i<32;i++){
         int b1 = (stream1>>i)&1;
         int b2 = (stream2>>i)&1;
-        // cout<<b1<<","<<b2<<endl;
         res += (b1^b2);
     }
     return res;
@@ -132,20 +129,13 @@ int cal_hamming(int count,const char* filepath1,const char* filepath2){
         fread(&a,sizeof(a),1,fp1);
         fread(&b,sizeof(b),1,fp2);
         hamm += hamming(a,b);
-        // cout<<"a:"<<a<<endl;
-        // cout<<"b:"<<b<<endl;
-        // cout<<"hamming:"<<hamming(a,b)<<endl;
-        // cout<<"jaccord:"<<32-hamming(a,b)<<endl;
+
         c--;
         if(c<=0){
             break;
         }
-        // if(c<=0){
-        //     cout<<"读文件结束"<<endl;
-        //     break;
-        // }
-    }
 
+    }
     return hamm;
 }
 
