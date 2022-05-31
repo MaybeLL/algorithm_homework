@@ -1,9 +1,14 @@
+/*
+ * @author yangni
+ * @date 2022/5/31
+ */
+
 # include<iostream>
 # include <fstream>
 # include<string>
 
 # include "CRC32.h"
-
+# include "part2.h"
 using namespace std;
 
 
