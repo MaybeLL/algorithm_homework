@@ -88,27 +88,23 @@ int **generateSignatureMatrix(elemtype **feature_matrix, int feature_dim) {
     }
 
     // h(x) = ((a*x + b) mod p_value) mod feature_num
-
-    for (int count = 0; count < SIGNATURES_NUM; count++) {
-        // 生成a, b
-        std::mt19937 rnd((unsigned int)time(NULL) + count * count);
-        uint32_t a = rnd(), b = rnd();
-        // printf("a=%u, b=%u\n", a, b);
-        for (int i = 0; i < DOCS_NUM; i++) {
-            // 将得到signatures_matrix[i][count]的值, 初始化为足够大的值
-            signature_matrix[i][count] = feature_dim;
-            // printf("signature matrix[%d][%d]:\n", i, count);
-            for (int s = 0; s < feature_dim; s++) {
-                if (feature_matrix[i][s] != 1) continue;
-                int hash_value = (((ull)a*s + b) % p_value) % feature_dim;
-                // printf("%d ", hash_value);
+    for (int i = 0; i < DOCS_NUM; i++) {
+        for (int count = 0; count < SIGNATURES_NUM; count++) {
+            // 将得到signatures_matrix[i][count]的值
+            std::mt19937 rnd((unsigned int)time(NULL) + count);
+            uint32_t a = rnd(), b = rnd();  // 生成a, b
+            printf("%u %u\n", a, b);
+            signature_matrix[i][count] = feature_dim; // 初始化需要足够大
+            for (int j = 0; j < feature_dim; j++) {
+                if (feature_matrix[i][j] != 1) continue;
+                int hash_value = (((ull)a*j + b) % p_value) % feature_dim;
                 if (hash_value < signature_matrix[i][count]) {
                     signature_matrix[i][count] = hash_value;
                 }
             }
-            // printf("\n");
         }
     }
+
     return signature_matrix;
 }
 
@@ -119,22 +115,22 @@ int main()
 
     elemtype **feature_matrix = generateFeatureMatrix(filename, feature_dim);
 
-    printf("feature matrix:\n");
-    for (int i = 0; i < DOCS_NUM; i++) {
-        for (int j = 0; j < feature_dim; j++) {
-            printf("%d ", feature_matrix[i][j]);
-        }
-        printf("\n");
-    }
+    // printf("feature matrix:\n");
+    // for (int i = 0; i < DOCS_NUM; i++) {
+    //     for (int j = 0; j < feature_dim; j++) {
+    //         printf("%d ", feature_matrix[i][j]);
+    //     }
+    //     printf("\n");
+    // }
 
     int **signature_matrix = generateSignatureMatrix(feature_matrix, feature_dim);
 
-    printf("signature matrix:\n");
+    FILE *fp_sigm = fopen("SigMat.txt", "w");
     for (int i = 0; i < DOCS_NUM; i++) {
         for (int j = 0; j < SIGNATURES_NUM; j++) {
-            printf("%d ", signature_matrix[i][j]);
+            fprintf(fp_sigm, "%d ", signature_matrix[i][j]);
         }
-        printf("\n");
+        fprintf(fp_sigm, "\n");
     }
 
     free(feature_matrix);
