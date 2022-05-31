@@ -35,8 +35,8 @@ void Shingle(const char *filename){
 
 }
 
-int main(){
+// int main(){
 
-    Shingle("document.txt");
-    return 0;
-}
+//     Shingle("documents.txt");
+//     return 0;
+// }
