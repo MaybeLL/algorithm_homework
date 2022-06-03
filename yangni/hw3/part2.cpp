@@ -12,22 +12,18 @@
 using namespace std;
 
 
-void Shingle(const char *filename){
+void Shingles(const char *filename){
 
     ifstream infile(filename);
     ofstream outfile("ShinglesSet.txt",std::ios::app);
     string x;
 
     while(getline(infile,x)){
-        
-        for(int i=0; i<493; i++){
-            // 提取8位字符，构造shingle
-            string temp = x.substr(i,8);
-     
-            // 调用CRC32算法，把字符串转化为32位无符号整数
-            unsigned int t = CRC32(&temp, 8);
 
-            // 写入
+        for(int i=0; i<SHINGLES_NUM; i++){
+            // 提取8位字符，利用CRC32算法转化成无符号整数
+            unsigned int t = CRC32(&x[i],8);
+            // 写入文件
             outfile <<t<<" ";
 
         }
@@ -36,7 +32,6 @@ void Shingle(const char *filename){
     }
     infile.close();
     outfile.close();
-
 
 }
 
