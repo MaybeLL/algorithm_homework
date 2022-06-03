@@ -25,7 +25,7 @@ void Shingle(const char *filename){
             string temp = x.substr(i,8);
      
             // 调用CRC32算法，把字符串转化为32位无符号整数
-            unsigned int t = CRC32(&temp,32);
+            unsigned int t = CRC32(&temp, 8);
 
             // 写入
             outfile <<t<<" ";
