@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
-#include 'GenerateJaccard.h'
+#include "GenerateJaccard.h"
 #define SINGLES_NUM 493 //singles num
 #define DOCS_NUM 1000 //documents num
 
