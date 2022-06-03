@@ -12,7 +12,7 @@
 using namespace std;
 
 
-void Shingles(const char *filename){
+void Shingle(const char *filename){
 
     ifstream infile(filename);
     ofstream outfile("ShinglesSet.txt",std::ios::app);
