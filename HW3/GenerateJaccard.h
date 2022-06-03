@@ -1,3 +1,3 @@
 #pragma once
 
-double GenerateJaccard(int** feature_matrix, int feature_dim);
+double **GenerateJaccard(int** feature_matrix, int feature_dim);
